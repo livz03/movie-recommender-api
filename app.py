@@ -1,11 +1,14 @@
 from flask import Flask, request, jsonify
-from recommander import MovieRecommender
+from recommender import MovieRecommender   #  corrected import
+import os
 
 # Initialize Flask
 app = Flask(__name__)
 
 # Initialize recommender with dataset
-recommender = MovieRecommender("movies.csv")
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+csv_path = os.path.join(BASE_DIR, "movies.csv")
+recommender = MovieRecommender(csv_path)
 
 @app.route("/recommend", methods=["POST"])
 def recommend():
@@ -26,4 +29,4 @@ def health():
     return jsonify({"status": "OK"})
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=True, host="0.0.0.0")   #  bind to all hosts for Railway
