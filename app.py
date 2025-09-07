@@ -1,5 +1,5 @@
 from flask import Flask, request, jsonify
-from recommender import MovieRecommender   #  corrected import
+from recommander import MovieRecommender   #  corrected import
 import os
 
 # Initialize Flask
